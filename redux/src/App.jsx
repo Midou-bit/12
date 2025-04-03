@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo, toggleTodo } from "./Redux/selector";
-import { selectTodos, selectCompletedTodos } from "./Redux/selector";
+import { addTodo, toggleTodo } from "./Redux/todoSlice";
+import { selectTodos, selectCompletedTodos } from "./Redux/selectors";
 
 const App = () => {
   const [input, setInput] = useState("");
@@ -17,7 +17,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "Arial" }}>
+    <div>
       <h1>Liste des tâches</h1>
       <input
         type="text"
@@ -31,10 +31,6 @@ const App = () => {
         {todos.map((todo) => (
           <li
             key={todo.id}
-            style={{
-              cursor: "pointer",
-              textDecoration: todo.completed ? "line-through" : "none",
-            }}
             onClick={() => dispatch(toggleTodo(todo.id))}
           >
             {todo.texte}
